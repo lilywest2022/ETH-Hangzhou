@@ -171,11 +171,11 @@ export default function Example({ products1 }) {
                                     <div className="hidden lg:flex lg:flex-1 lg:items-center">
                                         <a href="#">
                                             <span className="sr-only">Your Company</span>
-                                            <img
+                                            {/* <img
                                                 className="h-8 w-auto"
                                                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                                                 alt=""
-                                            />
+                                            /> */}
                                         </a>
                                     </div>
 
@@ -352,6 +352,7 @@ export default function Example({ products1 }) {
                                                 alt={product.imageAlt}
                                                 className="h-full w-full object-cover object-center group-hover:opacity-75"
                                                 onClick={async function handlewatchClick() {
+                                                    alert("123")
                                                     window.location.pathname = `/${product.id}`
                                                     const provider = new ethers.JsonRpcProvider(
                                                         TESTNET_URL

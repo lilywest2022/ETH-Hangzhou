@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Header from "../components/Header"
 
-function UploadPage () {
+function UploadPage() {
     const onUpload = async (event) => {
         event.preventDefault()
 

@@ -24,6 +24,20 @@ async function findNextVideoId() {
     })
     return maxId + 1
 }
+async function findNextPicId() {
+    let maxId = -1
+    const files = fs.readdirSync("./public/thumbnails")
+
+    files.forEach((filename) => {
+        if (filename.endsWith(".jpg")) {
+            const fileId = parseInt(path.parse(filename).name)
+            if (!isNaN(fileId)) {
+                maxId = Math.max(maxId, fileId)
+            }
+        }
+    })
+    return maxId + 1
+}
 
 export default async (req, res) => {
     if (req.method === "POST") {
@@ -39,7 +53,6 @@ export default async (req, res) => {
             // Set the file path where the uploaded file will be saved
             // console.log(file)
             if (file.mimetype === "video/mp4") {
-                const hash = generateUniqueHash()
                 const ID = findNextVideoId()
                 const filePath = `./public/videos/${ID}.mp4`
                 file.path = filePath
@@ -61,17 +74,17 @@ export default async (req, res) => {
         form.on("file", async (name, file) => {
             // Generate a unique ID for the video
             const videoId = await findNextVideoId()
+            const picId = await findNextPicId()
 
             // Rename the uploaded file to the video ID
             if (file.mimetype === "video/mp4") {
                 const newFilePath = path.join(
-                    "/home/ubuntu/code/ETHhangzhou/CUIT-Squad-ETH-Hangzhou/nextjs",
-                    "./public/videos",
+                    __dirname,
+                    "../../../../public/videos",
                     `${videoId}.mp4`
                 )
 
                 fs.rename(file.filepath, newFilePath, (err) => {
-                    console.log(file.filepath, newFilePath)
                     if (err) {
                         console.error(err)
                         return res.status(500).json({ error: "Failed to rename file" })
@@ -84,25 +97,30 @@ export default async (req, res) => {
                         path: `/videos/${videoId}.mp4`,
                     })
                 })
-                await mintERC721(hash)
             } else if (file.mimetype === "image/jpeg") {
+                console.log("this is a pic@!")
+
                 const newFilePath = path.join(
-                    "/home/ubuntu/code/ETHhangzhou/CUIT-Squad-ETH-Hangzhou/nextjs",
-                    "./public/thumbnails",
-                    `${videoId}.jpg`
+                    __dirname,
+                    "../../../../public/thumbnails",
+                    `${picId}.jpg`
                 )
 
-                fs.rename(file.filepath, newFilePath, (err) => {
+                console.log(file.filepath, newFilePath)
+
+                fs.rename(file.filepath, newFilePath, async (err) => {
                     if (err) {
                         console.error(err)
                         return res.status(500).json({ error: "Failed to rename file" })
                     }
 
                     console.log("File write success")
+                    const ERC721_hash = generateUniqueHash()
+                    await mintERC721(ERC721_hash)
 
                     res.status(200).json({
                         name: videoId,
-                        path: `/thumbnails/${videoId}.jpg`,
+                        path: `/thumbnails/${picId}.jpg`,
                     })
                 })
             }

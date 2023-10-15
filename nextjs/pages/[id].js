@@ -1,12 +1,12 @@
 import { useRouter } from "next/router"
 import { useState, useEffect, useRef } from "react"
-import { Popover, } from '@headlessui/react'
+import { Popover } from "@headlessui/react"
 import {
     Bars3Icon,
     MagnifyingGlassIcon,
     QuestionMarkCircleIcon,
     ShoppingBagIcon,
-} from '@heroicons/react/24/outline'
+} from "@heroicons/react/24/outline"
 import { ethers } from "ethers"
 import networkMapping from "../constants/networkMapping.json"
 import vidToken_abi from "../constants/VIDToken.json"
@@ -17,7 +17,7 @@ import { SharedStateContext } from "../components/SharedStateContext"
 const VIDToken_addr = networkMapping["31337"].VIDToken[0]
 const TESTNET_URL = "http://localhost:8545"
 
-export default function VideoPage () {
+export default function VideoPage() {
     const router = useRouter()
     const {
         userbalance,
@@ -76,8 +76,6 @@ export default function VideoPage () {
         setadvertiserBalance(advertiser_balance.toString())
     }
 
-        
-
     if (!videoId) {
         return <div>Loading...</div>
     }
@@ -90,16 +88,6 @@ export default function VideoPage () {
                     <div className="bg-gray-900">
                         <div className="mx-auto flex h-10 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
                             {/* Currency selector */}
-
-
-                            <div className="flex items-center space-x-6">
-                                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                                    Sign in
-                                </a>
-                                <a href="#" className="text-sm font-medium text-white hover:text-gray-100">
-                                    Create an account
-                                </a>
-                            </div>
                         </div>
                     </div>
 
@@ -111,20 +99,13 @@ export default function VideoPage () {
                                 <div className="hidden lg:flex lg:flex-1 lg:items-center">
                                     <a href="#">
                                         <span className="sr-only">Your Company</span>
-                                        <img
-                                            className="h-8 w-auto"
-                                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                            alt=""
-                                        />
                                     </a>
                                 </div>
 
                                 <div className="hidden h-full lg:flex">
                                     {/* Flyout menus */}
                                     <Popover.Group className="inset-x-0 bottom-0 px-4">
-                                        <div className="flex h-full justify-center space-x-8">
-
-                                        </div>
+                                        <div className="flex h-full justify-center space-x-8"></div>
                                     </Popover.Group>
                                 </div>
 
@@ -140,9 +121,15 @@ export default function VideoPage () {
                                     </button>
 
                                     {/* Search */}
-                                    <a href="#" className="ml-2 p-2 text-gray-400 hover:text-gray-500">
+                                    <a
+                                        href="#"
+                                        className="ml-2 p-2 text-gray-400 hover:text-gray-500"
+                                    >
                                         <span className="sr-only">Search</span>
-                                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+                                        <MagnifyingGlassIcon
+                                            className="h-6 w-6"
+                                            aria-hidden="true"
+                                        />
                                     </a>
                                 </div>
 
@@ -157,29 +144,48 @@ export default function VideoPage () {
                                 </a>
 
                                 <div className="flex flex-1 items-center justify-end">
-                                    <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                    <a
+                                        href="#"
+                                        className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                                    >
                                         Upload
                                     </a>
 
                                     <div className="flex items-center lg:ml-8">
                                         {/* Help */}
-                                        <a href="#" className="p-2 text-gray-400 hover:text-gray-500 lg:hidden">
+                                        <a
+                                            href="#"
+                                            className="p-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                                        >
                                             <span className="sr-only">Help</span>
-                                            <QuestionMarkCircleIcon className="h-6 w-6" aria-hidden="true" />
+                                            <QuestionMarkCircleIcon
+                                                className="h-6 w-6"
+                                                aria-hidden="true"
+                                            />
                                         </a>
-                                        <a href="#" className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block">
+                                        <a
+                                            href="#"
+                                            className="hidden text-sm font-medium text-gray-700 hover:text-gray-800 lg:block"
+                                        >
                                             Help
                                         </a>
 
                                         {/* Cart */}
                                         <div className="ml-4 flow-root lg:ml-8">
-                                            <a href="#" className="group -m-2 flex items-center p-2">
+                                            <a
+                                                href="#"
+                                                className="group -m-2 flex items-center p-2"
+                                            >
                                                 <ShoppingBagIcon
                                                     className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                                     aria-hidden="true"
                                                 />
-                                                <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
-                                                <span className="sr-only">items in cart, view bag</span>
+                                                <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                                                    0
+                                                </span>
+                                                <span className="sr-only">
+                                                    items in cart, view bag
+                                                </span>
                                             </a>
                                         </div>
                                     </div>
@@ -188,10 +194,10 @@ export default function VideoPage () {
                         </div>
                     </div>
                 </nav>
-            </header >
+            </header>
             <h1>Playing Video {videoId}</h1>
             <video width="640" height="360" controls autoPlay>
-                <source src={`/videos/${videoId}.mp4`} type="video/mp4" />
+                <source src={`/videos/${videoId}mp4`} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
@@ -208,8 +214,10 @@ export default function VideoPage () {
                 />
             </div>
 
-
-            <section aria-labelledby="featured-heading" className="relative mt-16 overflow-hidden rounded-lg lg:h-96">
+            <section
+                aria-labelledby="featured-heading"
+                className="relative mt-16 overflow-hidden rounded-lg lg:h-96"
+            >
                 <div className="absolute inset-0">
                     <img
                         src="https://tailwindui.com/img/ecommerce-images/category-page-01-featured-collection.jpg"
@@ -225,7 +233,8 @@ export default function VideoPage () {
                             Workspace Collection
                         </h2>
                         <p className="mt-1 text-sm text-gray-300">
-                            Upgrade your desk with objects that keep you organized and clear-minded.
+                            Upgrade your desk with objects that keep you organized and
+                            clear-minded.
                         </p>
                     </div>
                     <a
