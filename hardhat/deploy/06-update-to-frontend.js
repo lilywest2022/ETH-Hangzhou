@@ -52,14 +52,14 @@ async function updateContractAddresses() {
     )
     if (chainId in contractAddress) {
         if (!contractAddress[chainId]["VIDToken"].includes(VIDToken.target)) {
-            contractAddress[chainId]["VIDToken"].push(VIDToken.target)
+            contractAddress[chainId]["VIDToken"][0] = VIDToken.target
         }
     } else {
         contractAddress[chainId] = { VIDToken: [VIDToken.target] }
     }
     if (chainId in contractAddress) {
         if (!contractAddress[chainId]["platform"].includes(platform.target)) {
-            contractAddress[chainId]["platform"].push(platform.target)
+            contractAddress[chainId]["platform"][0] = platform.target
         }
     } else {
         contractAddress[chainId] = { platform: [platform.target] }
@@ -70,9 +70,8 @@ async function updateContractAddresses() {
                 ERC721PlatformManage.target
             )
         ) {
-            contractAddress[chainId]["ERC721PlatformManage"].push(
+            contractAddress[chainId]["ERC721PlatformManage"][0] =
                 ERC721PlatformManage.target
-            )
         }
     } else {
         contractAddress[chainId] = {
@@ -81,7 +80,7 @@ async function updateContractAddresses() {
     }
     if (chainId in contractAddress) {
         if (!contractAddress[chainId]["Gate"].includes(Gate.target)) {
-            contractAddress[chainId]["Gate"].push(Gate.target)
+            contractAddress[chainId]["Gate"][0] = Gate.target
         }
     } else {
         contractAddress[chainId] = { Gate: [Gate.target] }

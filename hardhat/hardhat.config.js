@@ -16,9 +16,6 @@ module.exports = {
     networks: {
         hardhat: {
             chainId: 31337,
-            forking: {
-                url: MAINNET_RPC_URL,
-            },
         },
         sepolia: {
             url: SEPOLIA_RPC_URL,
@@ -42,7 +39,7 @@ module.exports = {
         //gasPrice: 21,
         noColors: true,
         currency: "CNY",
-        //   coinmarketcap: COINMARKETCAP_API_KEY,
+        coinmarketcap: COINMARKETCAP_API_KEY,
         //token: "ETH",
     },
     etherscan: {
